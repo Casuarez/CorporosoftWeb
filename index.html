@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Biogrify</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+	<script type="text/javascript" src="http://use.typekit.com/tlj1qqr.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type="text/javascript" src="javascripts/raphael-min.js"></script> 
+		<script type="text/javascript">
+        
+			function draw_clock(){
+				canvas = Raphael("clock_id",200, 200);
+				var clock = canvas.circle(100,100,95);
+			     clock.attr({"fill":"#f5f5f5","stroke":"#444444","stroke-width":"5"})  
+			     var hour_sign;
+				for(i=0;i<12;i++){
+					var start_x = 100+Math.round(80*Math.cos(30*i*Math.PI/180));
+					var start_y = 100+Math.round(80*Math.sin(30*i*Math.PI/180));
+					var end_x = 100+Math.round(90*Math.cos(30*i*Math.PI/180));
+					var end_y = 100+Math.round(90*Math.sin(30*i*Math.PI/180));	
+					hour_sign = canvas.path("M"+start_x+" "+start_y+"L"+end_x+" "+end_y);
+				}    
+				hour_hand = canvas.path("M100 100L100 50");
+				hour_hand.attr({stroke: "#444444", "stroke-width": 6});
+				minute_hand = canvas.path("M100 100L100 40");
+				minute_hand.attr({stroke: "#444444", "stroke-width": 4});
+				second_hand = canvas.path("M100 110L100 25");
+				second_hand.attr({stroke: "#444444", "stroke-width": 2}); 
+				var pin = canvas.circle(100, 100, 5);
+				pin.attr("fill", "#000000");    
+				update_clock()
+				setInterval("update_clock()",1000);
+			}
+			
+			function update_clock(){
+				var now = new Date();
+				var hours = now.getHours();
+				var minutes = now.getMinutes();
+				var seconds = now.getSeconds();
+				hour_hand.rotate(30*hours+(minutes/2.5), 100, 100);
+				minute_hand.rotate(6*minutes, 100, 100);
+				second_hand.rotate(6*seconds, 100, 100);
+				
+			}
+		
+		</script>
+
+</head>
+<body>
+
+
+  <div class="topbar"></div>
+  <div class="glow">
+    <div class="container">
+    	<!--<nav class="slider-nav">
+			<ul>
+	    		<li class="prev">
+	    			<a class="prev" href="#"></a>
+	    		</li>
+	    		<li class="next">
+	    			<a class="next" href="#"></a>
+	    		</li>
+	    	</ul>
+    	</nav>-->
+      <div class="brand">
+      	<div id="clock_id"></div>
+		<script>draw_clock()</script></div>
+      <!--<div class="video">
+      	<iframe src="http://player.vimeo.com/video/33819232?title=0&amp;byline=0&amp;portrait=0" width="601" height="338" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+      </div>-->
+      <form action="/index.php" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <h1>Sign up below for an exclusive invite.</h1>
+        <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
+        <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="name@example.com">
+        <div class="submit"><input type="submit" value="GO" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+      </form>
+      <div id="response">
+              </div>
+      <ul class="social">
+        <li class="facebook"><a class="button" href="http://facebook.com/biogrify" target="_blank">Follow <span>us on</span><b class="icon"></b></a></li>
+        <li class="hand"></li>
+        <li class="twitter"><a class="button" href="http://twitter.com/biogrify" target="_blank">Follow <span>us on</span><b class="icon"></b></a></li>
+      </ul>
+      <div class="copyright">&copy; Copyright 2016 Biogrify inc. All Rights Reserved.</div>
+  	</div>
+  </div>
+
+
+	<!-- JS
+	================================================== -->
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="javascripts/mailing-list.js"></script>
+	<script type="text/javascript">
+	  $(window).load(function() {
+	 		$('.slider-nav a.next').click(function(e){
+	 			$('.brand').fadeOut(200, function(){
+	 				$('.video').fadeIn(200);
+	 			});
+	 			$(this).parent().fadeOut(200);
+	 			$('.slider-nav li.prev').fadeIn(200);
+		 	});
+
+	 		$('.slider-nav a.prev').click(function(e){
+	 			$('.video').fadeOut(200, function(){
+	 				$('.brand').fadeIn(500);
+	 			});
+	 			$('.slider-nav li.next').fadeIn(200);
+	 			$(this).parent().fadeOut(200)
+
+	 		});
+	 	});
+	</script>
+
+<!-- End Document
+================================================== -->
+</body>
+</html>
